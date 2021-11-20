@@ -1,0 +1,7 @@
+C:\Users\l0ss\Source\Repos\l0ss\ESC\esc\esc\bin\Debug\esc.exe.config
+C:\Users\l0ss\Source\Repos\l0ss\ESC\esc\esc\bin\Debug\esc.exe
+C:\Users\l0ss\Source\Repos\l0ss\ESC\esc\esc\bin\Debug\esc.pdb
+C:\Users\l0ss\Source\Repos\l0ss\ESC\esc\esc\obj\Debug\esc.csprojAssemblyReference.cache
+C:\Users\l0ss\Source\Repos\l0ss\ESC\esc\esc\obj\Debug\esc.csproj.CoreCompileInputs.cache
+C:\Users\l0ss\Source\Repos\l0ss\ESC\esc\esc\obj\Debug\esc.exe
+C:\Users\l0ss\Source\Repos\l0ss\ESC\esc\esc\obj\Debug\esc.pdb

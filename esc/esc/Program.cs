@@ -30,8 +30,23 @@ namespace evilsqlclient
     {
         public static void Main(string[] args)
         {
-            // Run console
-            EvilCommands.RunSQLConsole();
+            EvilCommands.SetupSQLConsole();
+            if (args.Length > 0)
+            {
+                string[] consoleCommands = args[0].Split(',');
+
+                foreach (string consoleCommand in consoleCommands)
+                {
+                    EvilCommands.RunSQLConsole(consoleCommand);
+                }
+                
+            }
+            else
+            {
+                // Run console interactive-style
+                EvilCommands.RunSQLConsole();
+            }
+
         }
 
         public class EvilCommands
@@ -2389,12 +2404,12 @@ namespace evilsqlclient
             // --------------------------------
             // FUNCTION: RunConsole / Query 
             // --------------------------------
-            public static string RunSQLConsole()
+            public static void SetupSQLConsole()
             {
 
                 // Setup columns for discovery table
                 if (MasterDiscoveredList.Columns.Count == 0)
-                {                    
+                {
                     MasterDiscoveredList.Columns.Add("Instance");
                     MasterDiscoveredList.Columns.Add("SamAccountName");
                 }
@@ -2420,10 +2435,20 @@ namespace evilsqlclient
                     MasterAccessList.Columns.Add("IsSysadmin");
                     MasterAccessList.Columns.Add("CurrentLoginPassword");
                 }
-
+            }
+            public static string RunSQLConsole(string consoleCommand = null)
+            {
                 // Read line from the client	
                 Console.Write("SQLCLIENT> ");
-                String MyQuery = Console.ReadLine().ToString();
+                String MyQuery;
+                if (!String.IsNullOrWhiteSpace(consoleCommand))
+                {
+                    MyQuery = consoleCommand;
+                }
+                else
+                {
+                    MyQuery = Console.ReadLine().ToString();
+                }
 
                 // Collect multi-line command until "go" is given
                 string fullcommand = "";
@@ -3151,8 +3176,15 @@ namespace evilsqlclient
                         Console.Write("         > ");
                     }
 
-                    // Collect additional query lines						
-                    MyQuery = Console.ReadLine().ToString();
+                    if (consoleCommand == null)
+                    {
+                        // Collect additional query lines						
+                        MyQuery = Console.ReadLine().ToString();
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
 
                 // ------------------------------------------------------------
@@ -3402,7 +3434,10 @@ namespace evilsqlclient
                 }
 
                 // Return to console 
-                EvilCommands.RunSQLConsole();
+                if (consoleCommand == null)
+                {
+                    EvilCommands.RunSQLConsole();
+                }
                 return null;
             }
         }
